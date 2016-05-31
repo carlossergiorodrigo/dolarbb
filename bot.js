@@ -1,7 +1,7 @@
 var Botkit = require('botkit');
 var http = require('http');
 var infoText = 'Puedes simplemente decirme "blue" u "oficial" para conocer sus cotizaciones. Tambien puedes decirme "diferencia" para saber cual es la diferencia entre sus valores. O simplemente decirme "cotización". ';
-var infoTextGroups = 'Pueden simplemente mencionarme con el mensaje "blue" u "oficial" para conocer las cotizaciones. Tambien pueden decirme "diferencia" para saber cual es la diferencia entre sus valores. O simplemente decirme "cotización". ';
+var infoTextGroups = 'Pueden simplemente mencionarme con el mensaje "blue" u "oficial" para conocer las cotizaciones. Tambien pueden decirme "diferencia" para saber cual es la diferencia entre sus valores. ';
 var controller = Botkit.slackbot({
     debug: false
 });
