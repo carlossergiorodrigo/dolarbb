@@ -1,7 +1,7 @@
 var Botkit = require('botkit');
 var http = require('http');
-var infoText = 'Puedes simplemente decirme "blue" u "oficial" para conocer sus cotizaciones. Tambien puedes decirme "diferencia" para saber cual es la diferencia entre sus valores. O simplemente decirme "cotización". ';
-var infoTextGroups = 'Pueden simplemente mencionarme con el mensaje "blue" u "oficial" para conocer las cotizaciones. Tambien pueden decirme "diferencia" para saber cual es la diferencia entre sus valores. ';
+var infoText = 'Puedes simplemente decirme "blue" u "oficial" para conocer sus cotizaciones. Tambien puedes decirme "diferencia" para saber cual es la diferencia entre sus valores.';
+var infoTextGroups = 'Pueden simplemente mencionarme con el mensaje "blue" u "oficial" para conocer las cotizaciones. Tambien pueden decirme "diferencia" para saber cual es la diferencia entre sus valores.';
 var controller = Botkit.slackbot({
     debug: false
 });
@@ -11,7 +11,7 @@ var apiObject = {
 };
 
 controller.spawn({
-    token: 'xoxb-44175921392-gwtxQOrytn1BEoppiD6rV7VH', //Slack bot Token
+    token: 'xoxb-44175921392-DhCA07upxtT2w7OdJ5Iwc26M', //Slack bot Token
 }).startRTM()
 
 controller.hears(['hola', 'hey'], ['direct_message', 'direct_mention', 'mention'], function(bot, message) {
@@ -105,7 +105,7 @@ controller.hears(['diferencia'], ['direct_message', 'direct_mention', 'mention']
         });
         response.on('end', function() {
             var values = JSON.parse(body);
-            bot.reply(message, 'El dolar blue se paga ' + (values.blue.value_sell - values.oficial.value_sell).toFixed(2) + ' centavos más para la venta y ' + (values.blue.value_buy - values.oficial.value_buy).toFixed(2) + ' centavos más en la compra');
+            bot.reply(message, 'El dolar blue se paga ' + (values.blue.value_sell - values.oficial.value_sell).toFixed(2) + ' centavos más que el oficial para la venta y ' + (values.blue.value_buy - values.oficial.value_buy).toFixed(2) + ' centavos más en la compra');
         });
     });
 });
