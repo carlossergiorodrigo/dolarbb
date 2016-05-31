@@ -4,7 +4,6 @@
   "description": "DolarBB is a slack bot that's provide information about the value of the official dolar and the informal (or blue) dolar in Argentina",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
