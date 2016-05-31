@@ -1,0 +1,27 @@
+{
+  "name": "dolarbb",
+  "version": "1.0.0",
+  "description": "DolarBB is a slack bot that's provide information about the value of the official dolar and the informal (or blue) dolar in Argentina",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlosrodrigome/dolarbb.git"
+  },
+  "keywords": [
+    "Dollar",
+    "Dolar",
+    "DolarBB",
+    "Dolar",
+    "Bot",
+    "Slack"
+  ],
+  "author": "Carlos Rodrigo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carlosrodrigome/dolarbb/issues"
+  },
+  "homepage": "https://github.com/carlosrodrigome/dolarbb#readme"
+}

@@ -1,12 +1,17 @@
 var Botkit = require('botkit');
 var http = require('http');
 var infoText = 'Puedes simplemente decirme "blue" u "oficial" para conocer sus cotizaciones. Tambien puedes decirme "diferencia" para saber cual es la diferencia entre sus valores. O simplemente decirme "cotización". ';
+var infoTextGroups = 'Pueden simplemente mencionarme con el mensaje "blue" u "oficial" para conocer las cotizaciones. Tambien pueden decirme "diferencia" para saber cual es la diferencia entre sus valores. O simplemente decirme "cotización". ';
 var controller = Botkit.slackbot({
     debug: false
 });
+var apiObject = {
+    host: 'api.bluelytics.com.ar',
+    path: '/v2/latest'
+};
 
 controller.spawn({
-    token: '',//Slack Bot Token
+    token: 'xoxb-44175921392-gwtxQOrytn1BEoppiD6rV7VH', //Slack bot Token
 }).startRTM()
 
 controller.hears(['hola', 'hey'], ['direct_message', 'direct_mention', 'mention'], function(bot, message) {
@@ -67,10 +72,7 @@ controller.hears(['hola', 'hey'], ['direct_message', 'direct_mention', 'mention'
 });
 
 controller.hears(['blue'], ['direct_message', 'direct_mention', 'mention'], function(bot, message) {
-    http.get({
-        host: 'api.bluelytics.com.ar',
-        path: '/v2/latest'
-    }, function(response) {
+    http.get(apiObject, function(response) {
         var body = '';
         response.on('data', function(d) {
             body += d;
@@ -83,10 +85,7 @@ controller.hears(['blue'], ['direct_message', 'direct_mention', 'mention'], func
 });
 
 controller.hears(['oficial'], ['direct_message', 'direct_mention', 'mention'], function(bot, message) {
-    http.get({
-        host: 'api.bluelytics.com.ar',
-        path: '/v2/latest'
-    }, function(response) {
+    http.get(apiObject, function(response) {
         var body = '';
         response.on('data', function(d) {
             body += d;
@@ -99,10 +98,7 @@ controller.hears(['oficial'], ['direct_message', 'direct_mention', 'mention'], f
 });
 
 controller.hears(['diferencia'], ['direct_message', 'direct_mention', 'mention'], function(bot, message) {
-    http.get({
-        host: 'api.bluelytics.com.ar',
-        path: '/v2/latest'
-    }, function(response) {
+    http.get(apiObject, function(response) {
         var body = '';
         response.on('data', function(d) {
             body += d;
@@ -115,20 +111,21 @@ controller.hears(['diferencia'], ['direct_message', 'direct_mention', 'mention']
 });
 
 controller.hears(['info'], ['direct_message', 'direct_mention', 'mention'], function(bot, message) {
-    http.get({
-        host: 'api.bluelytics.com.ar',
-        path: '/v2/latest'
-    }, function(response) {
-        var body = '';
-        response.on('data', function(d) {
-            body += d;
-        });
-        response.on('end', function() {
-            var values = JSON.parse(body);
-            bot.reply(message, infoText);
-        });
-    });
+    bot.reply(message, infoText);
 });
+
+controller.on('bot_channel_join',function(bot,message) {
+  bot.reply(message, "Hola a todos!, gracias por agregarme a este canal");
+  bot.reply(message, infoTextGroups);
+});
+
+/*controller.on('bot_channel_left',function(bot,message) {
+  bot.reply(message, "Bueno... se ve que tuve menos éxito que Osvaldo en Boca, gracias por la oportunidad!");
+  bot.reply(message, {
+      text: "Chau...",
+      icon_emoji: ":cry:",
+    });
+});*/
 
 function replayDolarValue(bot, message, dolar, type) {
     controller.storage.users.get(message.user, function(err, user) {
