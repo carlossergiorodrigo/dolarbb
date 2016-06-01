@@ -11,7 +11,7 @@ var apiObject = {
 };
 
 controller.spawn({
-    token: 'xoxb-44175921392-Ziv3UEHQT7Vo1dSCwYRxhxhO', //Slack bot Token
+    token: process.env.SLACK_BOT_TOKEN, //Slack bot Token
 }).startRTM()
 
 controller.hears(['hola', 'hey'], ['direct_message', 'direct_mention', 'mention'], function(bot, message) {
